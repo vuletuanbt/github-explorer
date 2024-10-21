@@ -1,0 +1,9 @@
+{
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "ignorePatterns": ["src/components/*", "src/generated-sdk.ts"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-hooks/exhaustive-deps": "off"
+  }
+}

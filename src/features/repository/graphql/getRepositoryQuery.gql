@@ -1,0 +1,5 @@
+query getRepository($name: String!, $owner: String!) {
+  result:repository(name: $name, owner: $owner) {
+    ...RepositoryFields
+  }
+}

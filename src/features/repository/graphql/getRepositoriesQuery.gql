@@ -1,0 +1,31 @@
+fragment RepositoryFields on Repository {
+  id
+  name
+  description
+  watchers {
+    totalCount
+  }
+  stargazerCount
+  updatedAt
+}
+
+query GetUserRepositories($username: String!, $after: String) {
+  result: user(login: $username) {
+    repositories(
+      first: 10
+      orderBy: { field: UPDATED_AT, direction: DESC }
+      after: $after
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          ...RepositoryFields
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,19 @@
+fragment IssueFields on Issue {
+  id
+  title
+  url
+  createdAt
+  author {
+    login
+  }
+}
+
+mutation createIssue($repositoryId: ID!, $title: String!, $body: String!) {
+  result: createIssue(
+    input: { repositoryId: $repositoryId, title: $title, body: $body }
+  ) {
+    issue {
+      ...IssueFields
+    }
+  }
+}
