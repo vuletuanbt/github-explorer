@@ -27,9 +27,14 @@ export const fetchRepositories = async (
 export const fetchRepository = async (
   param: GetRepositoryVariables
 ): Promise<GetRepository> => {
-  const res = await fetch(
-    apiUrl(`/api/users/${param.owner}/repository/${param.name}`)
-  );
-  const result = (await res.json()) as GetRepository;
-  return result;
+  try {
+    const res = await fetch(
+      apiUrl(`/api/users/${param.owner}/repository/${param.name}`)
+    );
+    const result = (await res.json()) as GetRepository;
+    return result;
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
 };
