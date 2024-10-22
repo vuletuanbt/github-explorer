@@ -10,7 +10,7 @@ interface IssueInfiniteScrollProps {
   owner: string;
 }
 
-export const RepositoryInfiniteScroll = ({
+export const IssuesInfiniteScroll = ({
   name,
   owner,
 }: IssueInfiniteScrollProps) => {
@@ -18,10 +18,6 @@ export const RepositoryInfiniteScroll = ({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useIssueCursorPagination({ owner, name });
   useEffect(() => {
-    console.log(`=========`);
-    console.log(`inView: ${inView}`);
-    console.log(`hasNextPage: ${hasNextPage}`);
-    console.log(`isFetchingNextPage: ${isFetchingNextPage}`);
     if (inView) {
       fetchNextPage();
     }
@@ -29,16 +25,13 @@ export const RepositoryInfiniteScroll = ({
 
   return (
     <div className="space-y-6">
-      <div
-        className="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 flex-row"
-        ref={ref}
-      >
+      <div className="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3">
         {data?.pages.map((group, i) => (
           <Fragment key={i}>
             {group.result?.issues.edges?.map((edge) => (
               <div
                 className="flex flex-row justify-between"
-                style={{ lineHeight: 3 }}
+                style={{ lineHeight: 4 }}
                 key={edge?.node?.id}
               >
                 <h3 className="text-lg font-thin">{edge?.node?.title}</h3>
@@ -55,12 +48,11 @@ export const RepositoryInfiniteScroll = ({
       {isFetchingNextPage && hasNextPage ? (
         <p className="text-center">Loading more...</p>
       ) : (
-        <p className="text-center">No more issue found</p>
+        <p className="text-center">No more repository found</p>
       )}
-
-      <div />
+      <div ref={ref} />
     </div>
   );
 };
 
-export default RepositoryInfiniteScroll;
+export default IssuesInfiniteScroll;

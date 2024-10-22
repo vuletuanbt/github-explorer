@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import RepositoryInfiniteScroll from "@/features/repository/components/RepositoryInfiniteScroll";
 import useUsersQuery from "../hooks/useUsersQuery";
 import Image from "next/image";
@@ -13,7 +13,7 @@ export default function UserSearch({ keyword }: UserSearchProps) {
   const { data: users } = useUsersQuery(keyword);
 
   return (
-    <>
+    <Fragment>
       <section className="w-full flex-1 mt-10">
         <h3 className="text-2xl text-left mb- font-semibold">User</h3>
         <section className="flex flex-col-reverse items-center">
@@ -49,6 +49,6 @@ export default function UserSearch({ keyword }: UserSearchProps) {
           </section>
         )}
       </section>
-    </>
+    </Fragment>
   );
 }

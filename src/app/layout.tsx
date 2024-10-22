@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Github Search",
-  description: "Github Search By Graphql",
+  title: "Github Explorer",
+  description: "Github Explorer By Graphql",
 };
 
 export default function RootLayout({

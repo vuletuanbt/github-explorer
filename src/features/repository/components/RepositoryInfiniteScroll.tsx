@@ -37,6 +37,7 @@ const RepositoryInfiniteScroll = ({
                   <Link
                     href={`/users/${username}/repository/${edge?.node?.name}`}
                     className="text-lg"
+                    
                   >
                     {edge?.node?.name}
                   </Link>

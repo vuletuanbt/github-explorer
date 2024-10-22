@@ -1,5 +1,4 @@
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import SearchBar from "@/components/search";
+import Search from "@/components/search";
 export default function Layout({
   children,
 }: Readonly<{
@@ -7,11 +6,12 @@ export default function Layout({
 }>) {
   return (
     <div className="px-10 text-center h-screen w-screen flex items-center flex-col">
-      {/* Search Section */}
-      <SearchBar />
-      {/* End Search Section */}
-      {children}
-      {process.env.NODE_ENV !== "production" && <ReactQueryDevtools />}
+      <section className="flex flex-col items-center">
+        <Search />
+      </section>
+      <section className="flex flex-col items-center w-full">
+        {children}
+      </section>
     </div>
   );
 }

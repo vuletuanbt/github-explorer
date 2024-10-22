@@ -1,7 +1,8 @@
-import IssuesInfiniteScroll from "@/features/issue/components/IssuesInfiniteScroll";
 import IssueCreateModal from "@/features/issue/components/IssueCreateModal";
+import IssuesInfiniteScroll from "@/features/issue/components/IssuesInfiniteScroll";
 import { fetchRepository } from "@/features/repository/action";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
 
 export default async function Repository({
   params,
@@ -14,11 +15,8 @@ export default async function Repository({
     return notFound();
   }
   return (
-    <div className="px-10 text-center h-screen w-screen flex items-center flex-col">
-      {/* Content Section */}
-
-      <section className="content-section w-full flex-1">
-        {/* where to put page cownt */}
+    <Fragment>
+      <section className="w-full flex-1 mt-10">
         <section className="flex justify-between">
           <h2 className="text-3xl font-bold">{repository?.result?.name}</h2>
           <h3 className="text-gray-400">
@@ -26,22 +24,18 @@ export default async function Repository({
             {repository?.result?.watchers?.totalCount} watching
           </h3>
         </section>
-
-        <section className="flex justify-between mt-10">
-          <h1 className="text-2xl font-bold">Open Issues</h1>
-
-          {/* Create Issue */}
-          <IssueCreateModal repositoryId={repository?.result?.id} />
-          {/* Create Issue */}
+        <section className="float-right">
+          <IssueCreateModal repositoryId={repository.result.id} />
         </section>
 
-        <IssuesInfiniteScroll
-          owner={owner}
-          name={name}
-          key={`${owner}${name}`}
-        />
+        <section className="w-full flex-1 mt-10">
+          <IssuesInfiniteScroll
+            owner={owner}
+            name={name}
+            key={`${owner}${name}`}
+          />
+        </section>
       </section>
-      {/* Content Section */}
-    </div>
+    </Fragment>
   );
 }
