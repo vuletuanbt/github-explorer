@@ -9,7 +9,7 @@ export default async function Home({
   return (
     <div className="px-10 text-center h-screen w-screen flex items-center flex-col">
       <section className="flex flex-col items-center">
-        <Search />
+        <Search keyword={keyword} />
       </section>
       <section className="flex flex-col items-center">
         {keyword && <UserSearch key={keyword} keyword={keyword} />}
