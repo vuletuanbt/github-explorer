@@ -12,7 +12,7 @@ export default function useIssueCursorPagination(
   params: GetRepositoryIssuesVariables
 ) {
   return useInfiniteQuery<GetRepositoryIssues>({
-    queryKey: ["issues", params],
+    queryKey: ["issues", params.name, params.owner],
     queryFn: (context) => fetchIssues(context, params),
     initialPageParam: undefined,
     getNextPageParam: (lastPage) => lastPage.result?.issues?.pageInfo.endCursor,

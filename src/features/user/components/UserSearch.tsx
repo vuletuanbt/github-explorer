@@ -16,10 +16,13 @@ export default function UserSearch({ keyword }: UserSearchProps) {
     <>
       <section className="w-full flex-1 mt-10">
         <h3 className="text-2xl text-left mb- font-semibold">User</h3>
-        <section className="flex flex-row items-center">
+        <section className="flex flex-col-reverse items-center">
           <div className="flex flex-wrap m-2 items-centers">
             {users?.map((user) => (
-              <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2" key={user.id}>
+              <div
+                className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2"
+                key={user.id}
+              >
                 <div className="aspect-square overflow-hidden">
                   <Image
                     key={user.id}
@@ -27,11 +30,11 @@ export default function UserSearch({ keyword }: UserSearchProps) {
                     alt={user.login}
                     className="w-full h-full object-cover"
                     onClick={() => setUsername(user.login)}
-                    width={128}
-                    height={128}
+                    width={256}
+                    height={256}
                   />
-                  <span className="text-black z-10">{user.login}</span>
                 </div>
+                <span className="text-black z-10">{user.login}</span>
               </div>
             ))}
           </div>

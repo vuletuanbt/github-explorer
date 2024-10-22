@@ -1,7 +1,6 @@
 import IssuesInfiniteScroll from "@/features/issue/components/IssuesInfiniteScroll";
 import IssueCreateModal from "@/features/issue/components/IssueCreateModal";
 import { fetchRepository } from "@/features/repository/action";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 export default async function Repository({
@@ -28,23 +27,19 @@ export default async function Repository({
           </h3>
         </section>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <section className="flex justify-between mt-10">
-            <h1 className="text-2xl font-bold">Open Issues</h1>
+        <section className="flex justify-between mt-10">
+          <h1 className="text-2xl font-bold">Open Issues</h1>
 
-            {/* Create Issue */}
-            {repository?.result?.id && (
-              <IssueCreateModal repositoryId={repository?.result?.id} />
-            )}
-            {/* Create Issue */}
-          </section>
+          {/* Create Issue */}
+          <IssueCreateModal repositoryId={repository?.result?.id} />
+          {/* Create Issue */}
+        </section>
 
-          <IssuesInfiniteScroll
-            owner={owner}
-            name={name}
-            key={`${owner}${name}`}
-          />
-        </Suspense>
+        <IssuesInfiniteScroll
+          owner={owner}
+          name={name}
+          key={`${owner}${name}`}
+        />
       </section>
       {/* Content Section */}
     </div>

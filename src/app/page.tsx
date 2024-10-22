@@ -11,7 +11,7 @@ export default async function Home({
       <section className="flex flex-col items-center">
         <Search keyword={keyword} />
       </section>
-      <section className="flex flex-col items-center">
+      <section className="flex flex-col items-center w-full">
         {keyword && <UserSearch key={keyword} keyword={keyword} />}
       </section>
     </div>

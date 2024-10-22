@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { useEffect, Fragment } from "react";
 import { useInView } from "react-intersection-observer";
 import useIssueCursorPagination from "../hooks/useIssueCursorPagination";
+import { formatDistanceToNow } from "date-fns";
 
 interface IssueInfiniteScrollProps {
   name: string;
@@ -17,6 +18,10 @@ export const RepositoryInfiniteScroll = ({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useIssueCursorPagination({ owner, name });
   useEffect(() => {
+    console.log(`=========`);
+    console.log(`inView: ${inView}`);
+    console.log(`hasNextPage: ${hasNextPage}`);
+    console.log(`isFetchingNextPage: ${isFetchingNextPage}`);
     if (inView) {
       fetchNextPage();
     }
@@ -24,9 +29,12 @@ export const RepositoryInfiniteScroll = ({
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3">
+      <div
+        className="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 flex-row"
+        ref={ref}
+      >
         {data?.pages.map((group, i) => (
-          <React.Fragment key={i}>
+          <Fragment key={i}>
             {group.result?.issues.edges?.map((edge) => (
               <div
                 className="flex flex-row justify-between"
@@ -35,12 +43,12 @@ export const RepositoryInfiniteScroll = ({
               >
                 <h3 className="text-lg font-thin">{edge?.node?.title}</h3>
                 <span className="text-gray-400">
-                  {edge?.node?.createdAt} {" by "}
+                  {formatDistanceToNow(edge?.node?.createdAt)} {" by "}
                   {edge?.node?.author?.login}
                 </span>
               </div>
             ))}
-          </React.Fragment>
+          </Fragment>
         ))}
       </div>
 
@@ -50,7 +58,7 @@ export const RepositoryInfiniteScroll = ({
         <p className="text-center">No more issue found</p>
       )}
 
-      <div ref={ref} />
+      <div />
     </div>
   );
 };
