@@ -6,7 +6,6 @@
     "postinstall": "yarn codegen",
     "dev": "next dev",
     "build": "next build",
-    "build:amplify": "next build",
     "start": "next start",
     "lint": "next lint",
     "codegen": "npx graphql-codegen --config codegen.ts"
